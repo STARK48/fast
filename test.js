@@ -1,3 +1,4 @@
+const puppeteer = require('puppeteer');
 (async () => {
     const browser = await puppeteer.launch({headless:true,args:['--disabled-setuid-sandbox', '--no-sandbox','--lang=fr-FR,fr']})
     const page = await browser.newPage()
