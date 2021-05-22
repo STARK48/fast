@@ -1,16 +1,17 @@
 const puppeteer = require('puppeteer');
 (async () => {
-    const browser = await puppeteer.launch({headless:true,args:['--disabled-setuid-sandbox', '--no-sandbox','--lang=fr-FR,fr']})
+    const browser = await puppeteer.launch({headless:false,args:['--disabled-setuid-sandbox', '--no-sandbox','--lang=fr-FR,fr']})
     const page = await browser.newPage()
-    await page.goto('https://booking.com')
-    await page.type('#ss', 'Berlin')
-    await page.click('.sb-searchbox__button')
-    await page.waitForSelector('#hotellist_inner')
-    await page.screenshot({ path: screenshot })
-    const hotels = await page.$$eval('span.sr-hotel__name', anchors => {
-     return anchors.map(anchor => anchor.textContent.trim()).slice(0, 10)
-    })
-    console.log(hotels)
-    await browser.close()
-    console.log('See screenshot: ' + screenshot)
+    await page.goto('https://www.google.com/maps/')
+    await page.type('#searchboxinput', 'Berlin')
+    await page.keyboard.press("Enter");    
+    await page.waitForTimeout(4000); 
+
+    
+    const close_button = await page.waitForSelector("button[data-value='Partager']");
+    close_button.click();
+   
+
+    
+    
    })()
